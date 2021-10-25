@@ -1,0 +1,29 @@
+language: generic
+os: linux
+dist: focal
+
+addons:
+  apt:
+    packages:
+      - libgmp-dev
+      - libmpfr-dev
+      - libppl-dev
+      - libz3-dev
+    update: true
+
+before_install:
+  - curl https://build.travis-ci.org/files/rustup-init.sh -sSf | sh -s -- -y --default-toolchain nightly --profile minimal
+  - export PATH=$HOME/.cargo/bin:$PATH
+  - rustup component add rustc-dev llvm-tools-preview
+  - curl -L https://github.com/mozilla/grcov/releases/latest/download/grcov-linux-x86_64.tar.bz2 | tar jxf -
+
+script:
+  - export CARGO_INCREMENTAL=0
+  - export RUSTFLAGS="-Zprofile -Ccodegen-units=1 -Copt-level=0 -Clink-dead-code -Coverflow-checks=off -Zpanic_abort_tests"
+  - cargo build --verbose
+  - RUST_TEST_THREADS=1 cargo test --verbose -- --nocapture
+  - export LD_LIBRARY_PATH=$(rustc --print sysroot)/lib:$LD_LIBRARY_PATH
+  - cd tests && python3 run.py 2>/dev/null && cd ..
+  - |
+    ./grcov ./target/debug/ -s . -t lcov --llvm --ignore-not-existing --ignore build.rs --ignore "/*" --excl-start "#\[cfg\(test\)\]" --excl-stop "^}" --excl-br-line "^\s*((debug_)?assert(_eq|_ne)?!|#\[derive\()" -o lcov.info;
+    bash <(curl -s https://codecov.io/bash) -t e67b5915-9972-4d9f-ae0d-b5f1321496e6 -f lcov.info;

@@ -1,0 +1,16 @@
+[package]
+name = "apron-sys"
+version = "0.1.0"
+authors = ["Li Zhuohua <lizhuohua1994@gmail.com>"]
+edition = "2018"
+build = "build.rs"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+gmp-mpfr-sys = "1.1.14"
+libc = "0.2.66"
+
+[build-dependencies]
+cc = { version = "1.0", features = ["parallel"] }
+bindgen = "0.52.0"

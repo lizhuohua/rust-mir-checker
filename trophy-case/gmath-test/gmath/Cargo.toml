@@ -1,0 +1,13 @@
+[package]
+name = "gmath"
+license = "MIT"
+version = "0.1.0"
+authors = ["Elias Sjögreen"]
+edition = "2018"
+
+[lib]
+# crate-type = ["cdylib"]
+path = "wasm/lib.rs"
+
+[profile.release]
+lto = true

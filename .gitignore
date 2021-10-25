@@ -1,0 +1,11 @@
+**/target
+**/mir_dump
+**/*.rs.bk
+*.dot
+*.png
+examples/**/Cargo.lock
+examples/**/**/Cargo.lock
+scripts/real-world-crates/**/
+scripts/operating-systems
+scripts/evaluations/**/
+main
