@@ -2,7 +2,7 @@ name: build
 
 on:
   push:
-    branches: [ master ]
+    branches: "**"
   pull_request:
     branches: [ master ]
 
@@ -12,22 +12,14 @@ env:
 jobs:
   build:
     if: "!contains(github.event.head_commit.message, 'skip ci')"
-    strategy:
-          matrix:
-            os: ['ubuntu-latest', 'macos-latest']
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
 
     steps:
-    - name: Install dependencies (Linux)
+    - name: Install dependencies
       run: |
         sudo apt-get update
         sudo apt-get install libgmp-dev libmpfr-dev libppl-dev libz3-dev
-      if: matrix.os == 'ubuntu-latest'
       
-    - name: Install dependencies (macOS)
-      run: brew install gmp mpfr ppl z3
-      if: matrix.os == 'macos-latest'
-
     - name: Get sources
       uses: actions/checkout@v2
       with:
