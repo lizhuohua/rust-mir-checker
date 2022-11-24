@@ -12,7 +12,7 @@ The associated paper titled *MirChecker: Detecting Bugs in Rust Programs via Sta
 
 ## Requirements
 
-* Rust nightly, as specified in [rust-toolchain](rust-toolchain).
+* Rust nightly, as specified in [rust-toolchain](rust-toolchain.toml).
 * `rustc-dev` and `llvm-tools-preview`:
 
     ```sh
