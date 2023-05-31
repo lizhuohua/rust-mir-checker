@@ -42,12 +42,16 @@ The associated paper titled *MirChecker: Detecting Bugs in Rust Programs via Sta
 2. Build & Install
 
     ```sh
+    # make sure to have llvm/clang version 15 installed
+    $ export LIBCLANG_PATH=`llvm-config-15 --libdir`/libclang.so.1
     # You can build and install the cargo subcommand:
-    $ cargo install --path .
+    $ cargo install --locked --path .
     
     # Or, you can only build the checker itself:
     $ cargo build
     ```
+
+Note: clang 15 is required because of [this issue with handling anonymous structs in clang 16](https://github.com/rust-lang/rust-bindgen/issues/2312).
 
 ## Example
 
