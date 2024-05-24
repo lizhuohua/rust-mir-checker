@@ -1,6 +1,5 @@
 # MirChecker: A Simple Static Analysis Tool for Rust
 
-[![Build Status](https://travis-ci.com/lizhuohua/rust-mir-checker.svg?token=gQ3MGp1DXsVespCpQBDg&branch=master)](https://travis-ci.com/lizhuohua/rust-mir-checker)
 [![Build Status](https://github.com/lizhuohua/rust-mir-checker/workflows/build/badge.svg)](https://github.com/lizhuohua/rust-mir-checker/actions?query=workflow%3Abuild)
 [![codecov](https://codecov.io/gh/lizhuohua/rust-mir-checker/branch/master/graph/badge.svg?token=Y4MlI5AUql)](https://codecov.io/gh/lizhuohua/rust-mir-checker)
 
@@ -24,9 +23,6 @@ The associated paper titled *MirChecker: Detecting Bugs in Rust Programs via Sta
     ```sh
     # For Ubuntu:
     $ sudo apt-get install libgmp-dev libmpfr-dev libppl-dev libz3-dev
-    
-    # For macOS:
-    $ brew install gmp mpfr ppl z3
     ```
 
 ## Build
