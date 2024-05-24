@@ -7,6 +7,11 @@ use std::process::Command;
 
 fn main() {
     // Used to generate `ap_version.h`, which is required for building Apron
+    Command::new("./configure")
+        .current_dir("apron/")
+        .args(&["-no-ocaml", "-no-java"])
+        .status()
+        .unwrap();
     Command::new("make")
         .args(&["-C", "apron/apron/", "ap_version.h"])
         .status()

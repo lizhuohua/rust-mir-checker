@@ -27,9 +27,18 @@ jobs:
     
     - name: Install Rust components
       run: rustup component add rustc-dev llvm-tools-preview
+
+    - name: Download LLVM binary
+      run: |
+        wget https://github.com/llvm/llvm-project/releases/download/llvmorg-15.0.6/clang+llvm-15.0.6-x86_64-linux-gnu-ubuntu-18.04.tar.xz
+        tar xvf clang+llvm-15.0.6-x86_64-linux-gnu-ubuntu-18.04.tar.xz
       
     - name: Build
-      run: cargo build --verbose
+      run: |
+        export LIBCLANG_PATH=$(pwd)/clang+llvm-15.0.6-x86_64-linux-gnu-ubuntu-18.04/lib/libclang.so
+        export PATH=$(pwd)/clang+llvm-15.0.6-x86_64-linux-gnu-ubuntu-18.04/bin:$PATH
+        export RUSTFLAGS="-Clink-args=-fuse-ld=lld"
+        cargo build --verbose
       
     - name: Run tests
       run: RUST_TEST_THREADS=1 cargo test --verbose
